@@ -22,16 +22,16 @@ using namespace std;
 class WorkTicket
 {
 private:
-	int myticketNumber;
-	int myticketDay;
-	int myticketMonth;
-	int myticketYear;
+	int myticketNumber{};
+	int myticketDay{};
+	int myticketMonth{};
+	int myticketYear{};
 	string myclientID;
 	string myissueDescrip;
 
 public:
 	//Constructor: 
-	WorkTicket(int ticketNumber = 0, int ticketDay = 1, int ticketMonth = 1, int ticketYear = 2000, string clientID = "", string issueDescrip = "");
+	WorkTicket(int myticketNumber = 0, int myticketDay = 1, int myticketMonth = 1, int myticketYear = 2000, string myclientID = "", string myissueDescrip = "");
 
 	// Accesors(getters):
 	int GetNumber();
@@ -57,12 +57,58 @@ public:
 // main function
 int main()
 {
+	WorkTicket arr[3];
+	int inputNumber;
+	int inputday, inputMonth, inputYear;
+	string inputID;
+	string inputDescrip;
 
+	cout << "Enter the information as prompted: " << endl;
+
+	for (int i = 0; i < 3; i++)
+	{
+		try
+		{
+			cout << "Enter the ticket number: ";
+			inputNumber = ConsoleInput::ReadInteger();
+			arr[i].SetNumber(inputNumber);
+
+			cout << "Enter the Client ID: ";
+			cin >> inputID;
+			arr[i].SetID(inputID);
+
+			cout << "Enter the date: ";
+			cin >> inputday >> inputMonth >> inputYear;
+			arr[i].SetDay(inputday);
+			arr[i].SetMonth(inputMonth);
+			arr[i].SetYear(inputYear);
+
+			cout << "Write the brief description of the problem: ";
+			cin >> inputDescrip;
+			arr[i].SetDescription(inputDescrip);
+		}
+		catch (const exception& ex)
+		{
+			cerr << ex.what();
+		}
+	}
+	cout << endl << endl;
+	cout << "You entered the noted below information, please check.";
+	for (int i=0; i<3; i++)
+	{
+		cout << "Your ticket number: " << arr[i].GetNumber() << endl;
+		cout << "Your entered date: " << arr[i].GetDay() << "/" << arr[i].GetMonth() << "/" << arr[i].GetYear() << endl;
+		cout << "Your entered client ID: " << arr[i].GetID() << endl;
+		cout << "Your entered description: " << arr[i].GetDescription() << endl;;
+
+		cout << endl;
+	}
 }
 
 // class definition section
 
-WorkTicket::WorkTicket(int ticketNumber, int ticketDay, int ticketMonth, int ticketYear, string clientID, string issueDescrip)
+WorkTicket::WorkTicket(int ticketNumber, int ticketDay, int ticketMonth, int ticketYear, string clientID,
+                       string issueDescrip)
 {
 	SetWorkTicket(ticketNumber, ticketDay, ticketMonth, ticketYear, clientID, issueDescrip);
 }
@@ -182,7 +228,7 @@ string WorkTicket::GetDescription()
 	return myissueDescrip;
 }
 
-string WorkTicket::ShowWorkTicket() const
-{
-
-}
+//string WorkTicket::ShowWorkTicket() const
+//{
+//   
+//}
